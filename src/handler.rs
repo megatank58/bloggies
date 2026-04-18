@@ -57,7 +57,7 @@ impl EventHandler for Handler {
 			.and_then(|guild| guild.channels.get(&message.channel_id).cloned())
 			.and_then(|channel| channel.topic);
 
-		if topic.is_some_and(|topic| message.author.id.to_string() != topic) {
+		if topic.is_some_and(|topic| message.author.id.to_string() != topic) && !message.author.bot {
 			message.delete(&ctx).await.ok();
 		}
 	}
